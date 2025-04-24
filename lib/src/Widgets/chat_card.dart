@@ -29,7 +29,7 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (chatCardType == ChatCardType.simple_chat_card) {
+    if (chatCardType == ChatCardType.simpleChatCard) {
       return Align(
         alignment: myUserId == chatMap[userKey]
             ? Alignment.centerRight
@@ -61,7 +61,7 @@ class ChatCard extends StatelessWidget {
           ),
         ),
       );
-    } else if (chatCardType == ChatCardType.gradient_chat_card) {
+    } else if (chatCardType == ChatCardType.gradientChatCard) {
       return Align(
         alignment: myUserId == chatMap[userKey]
             ? Alignment.centerRight

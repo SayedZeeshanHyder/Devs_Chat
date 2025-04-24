@@ -9,7 +9,7 @@ class DevsChatScreen extends StatefulWidget {
   final ChatAppBarType? appBar;
   final PreferredSizeWidget? appBarWidget;
   final void Function(Map message)? onSendMessageButtonPressed;
-  String? documentId;
+  final String? documentId;
   final String userIdKey;
   final String myUserId;
   final String oppUserId;
@@ -55,16 +55,20 @@ class DevsChatScreen extends StatefulWidget {
 }
 
 class _DevsChatScreenState extends State<DevsChatScreen> {
+  String? documentId;
   @override
   void initState() {
     super.initState();
     if (widget.documentId == null) {
       if (widget.myUserId.hashCode > widget.oppUserId.hashCode) {
-        widget.documentId = "${widget.myUserId}${widget.oppUserId}";
+        documentId = "${widget.myUserId}${widget.oppUserId}";
       } else {
-        widget.documentId = "${widget.oppUserId}${widget.myUserId}";
+        documentId = "${widget.oppUserId}${widget.myUserId}";
       }
+    } else {
+      documentId = widget.documentId;
     }
+    setState(() {});
   }
 
   final TextEditingController messageController = TextEditingController();
@@ -180,7 +184,7 @@ class _DevsChatScreenState extends State<DevsChatScreen> {
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection(widget.collectionName)
-                        .doc(widget.documentId)
+                        .doc(documentId)
                         .snapshots(),
                     builder: (context, snapshot) {
                       List chats =

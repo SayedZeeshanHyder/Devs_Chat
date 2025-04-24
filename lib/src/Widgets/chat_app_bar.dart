@@ -8,7 +8,7 @@ class ChatAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (chatAppBarType == ChatAppBarType.default_app_bar) {
+    if (chatAppBarType == ChatAppBarType.defaultAppBar) {
       return Row(
         children: [
           Icon(
@@ -42,7 +42,7 @@ class ChatAppBar extends StatelessWidget {
           )
         ],
       );
-    } else if (chatAppBarType == ChatAppBarType.gradient_app_bar) {
+    } else if (chatAppBarType == ChatAppBarType.gradientAppBar) {
       return Row();
     }
     return Container();
