@@ -23,7 +23,7 @@ class ChatInputField extends StatefulWidget {
   final Curve animationCurve;
 
   const ChatInputField({
-    Key? key,
+    super.key,
     required this.controller,
     this.focusNode,
     this.inputType = InputFieldType.defaultInput,
@@ -43,7 +43,7 @@ class ChatInputField extends StatefulWidget {
     this.accentColor,
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeInOut,
-  }) : super(key: key);
+  });
 
   @override
   _ChatInputFieldState createState() => _ChatInputFieldState();
@@ -99,8 +99,6 @@ class _ChatInputFieldState extends State<ChatInputField>
         return _buildAttachmentInput(primaryColor);
       case InputFieldType.voiceInput:
         return _buildVoiceInput(primaryColor);
-      default:
-        return _buildDefaultInput(primaryColor);
     }
   }
 

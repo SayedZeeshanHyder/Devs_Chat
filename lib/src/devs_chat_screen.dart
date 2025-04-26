@@ -71,7 +71,7 @@ class DevsChatScreen extends StatefulWidget {
   final Widget? scrollToBottomButtonWidget;
 
   DevsChatScreen({
-    Key? key,
+    super.key,
     // Chat card options
     this.chatCardType,
     this.chatCardWidget,
@@ -136,7 +136,7 @@ class DevsChatScreen extends StatefulWidget {
     this.listPadding,
     this.showScrollToBottomButton = false,
     this.scrollToBottomButtonWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<DevsChatScreen> createState() => _DevsChatScreenState();
@@ -255,7 +255,6 @@ class _DevsChatScreenState extends State<DevsChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(showScrollToBottom);
     return SafeArea(
       child: Scaffold(
         appBar: widget.appBarWidget ??
