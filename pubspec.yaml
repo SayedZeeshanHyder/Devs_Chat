@@ -1,6 +1,6 @@
 name: devs_chat
 description: "A customizable Flutter chat UI package with Firebase Firestore integration. Create beautiful chat interfaces easily."
-version: 0.0.1
+version: 0.0.3
 repository: https://github.com/SayedZeeshanHyder/Devs_Chat
 
 environment:
