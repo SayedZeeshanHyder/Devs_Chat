@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 
 class TapAndLongPressGestureRecognizer extends OneSequenceGestureRecognizer {
   final GestureTapCallback? onTap;
