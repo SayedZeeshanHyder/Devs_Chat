@@ -1,9 +1,12 @@
+
 # Devs Chat
 
 A powerful, customizable Flutter chat UI package with seamless Firebase Firestore integration.
 
 [![pub package](https://img.shields.io/pub/v/devs_chat.svg)](https://pub.dev/packages/devs_chat)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/thelegend101)
+
 
 ## 🌟 Features
 
@@ -14,6 +17,57 @@ A powerful, customizable Flutter chat UI package with seamless Firebase Firestor
 - **Responsive Design** - Works across all screen sizes
 
 ---
+Chat Card Types
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://i.ibb.co/WWkrYksL/Modern-Chat-Card.jpg" width="200"/><br>
+      <sub>Modern Chat Card</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/3yXjtsj2/Material-Chat-Card.jpg" width="200"/><br>
+      <sub>Material Chat Card</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/VckQyhmZ/IOSStyled.jpg" width="200"/><br>
+      <sub>IOS Chat Card</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/dwNPd2nh/Gradient-Chat-Card.jpg" width="200"/><br>
+      <sub>Gradient Chat Card</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/WwYPVx7/Cardchatcard.jpg" width="200"/><br>
+      <sub>Card Chat Card</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/jZyQHFKd/Background-Image.jpg" width="200"/><br>
+      <sub>Chat Background</sub>
+    </td>
+  </tr>
+</table>
+
+Other Features
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://i.ibb.co/pjFdP4Q5/Link.jpg" width="200"/><br>
+      <sub>Message Links</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/QjTpNnhT/Voice-Button.jpg" width="200"/><br>
+      <sub>Voice Chat TextField</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/5Xr94Gmq/Document-Button.jpg" width="200"/><br>
+      <sub>Document Adding Text Field</sub>
+    </td>
+    <td align="center">
+      <img src="https://i.ibb.co/1tCtFm2m/Gradient-App-Bar.jpg" width="200"/><br>
+      <sub>Gradient App Bar</sub>
+    </td>
+  </tr>
+</table>
 
 ## 📦 Installation
 
@@ -21,7 +75,7 @@ Add devs_chat to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  devs_chat: ^0.0.1
+  devs_chat: ^0.0.4
 ```
 
 Run:
