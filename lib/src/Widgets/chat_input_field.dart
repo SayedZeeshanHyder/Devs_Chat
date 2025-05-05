@@ -99,8 +99,6 @@ class _ChatInputFieldState extends State<ChatInputField>
         return _buildAttachmentInput(primaryColor);
       case InputFieldType.voiceInput:
         return _buildVoiceInput(primaryColor);
-      default:
-        return _buildDefaultInput(primaryColor);
     }
   }
 
