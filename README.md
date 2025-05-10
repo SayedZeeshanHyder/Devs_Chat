@@ -75,7 +75,7 @@ Add devs_chat to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  devs_chat: ^0.0.4
+  devs_chat: ^0.0.6
 ```
 
 Run:

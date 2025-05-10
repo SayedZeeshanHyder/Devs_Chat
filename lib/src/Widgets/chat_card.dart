@@ -1,33 +1,77 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/chat_types.dart';
 
+/// A customizable chat bubble widget for displaying messages in a chat interface.
 class ChatCard extends StatefulWidget {
+  /// Optional custom widget to replace the default chat UI.
   final Widget? chatCardWidget;
+
+  /// General decoration for the entire chat card.
   final BoxDecoration? decoration;
+
+  /// Defines the type of the chat card (e.g. simple, rich, etc.).
   final ChatCardType? chatCardType;
+
+  /// The key in [chatMap] that represents the sender's user ID.
   final String userKey;
+
+  /// The key in [chatMap] that represents the message text.
   final String messageKey;
+
+  /// The data representing the message content and metadata.
   final Map chatMap;
+
+  /// The current user's user ID, used to distinguish between "my" messages and others.
   final String myUserId;
+
+  /// Decoration applied to the current user's messages.
   final BoxDecoration? myMessageDecoration;
+
+  /// Decoration applied to messages from other users.
   final BoxDecoration? otherMessageDecoration;
+
+  /// Text style for the current user's messages.
   final TextStyle? myMessageTextStyle;
+
+  /// Text style for messages from other users.
   final TextStyle? otherMessageTextStyle;
+
+  /// Padding inside the chat bubble.
   final EdgeInsetsGeometry? padding;
+
+  /// Margin outside the chat bubble.
   final EdgeInsetsGeometry? margin;
+
+  /// Maximum width for a chat bubble.
   final double? maxWidth;
+
+  /// Optional key in [chatMap] to extract a timestamp value.
   final String? timestampKey;
+
+  /// Optional custom widget builder for the timestamp.
   final Widget Function(DateTime)? timestampBuilder;
+
+  /// Whether to show the avatar of the sender/receiver.
   final bool showAvatar;
+
+  /// Avatar image for the sender.
   final ImageProvider? senderAvatar;
+
+  /// Avatar image for the receiver.
   final ImageProvider? receiverAvatar;
+
+  /// Optional display name for the sender.
   final String? senderName;
+
+  /// Optional display name for the receiver.
   final String? receiverName;
 
+  /// Creates a new [ChatCard] widget.
   const ChatCard({
-    Key? key,
+    super.key,
     this.chatCardWidget,
     this.decoration,
     this.chatCardType = ChatCardType.simpleChatCard,
@@ -49,7 +93,7 @@ class ChatCard extends StatefulWidget {
     this.receiverAvatar,
     this.senderName,
     this.receiverName,
-  }) : super(key: key);
+  });
 
   @override
   State<ChatCard> createState() => _ChatCardState();
@@ -73,8 +117,9 @@ class _ChatCardState extends State<ChatCard> {
         onLongPress: _onLongPress,
         onTap: _onLongPress,
         child: Container(
-          color:
-              _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+          color: _isSelected
+              ? Colors.grey.withAlpha((255 * 0.3).round())
+              : Colors.transparent,
           child: Align(alignment: alignment, child: widget.chatCardWidget!),
         ),
       );
@@ -166,7 +211,9 @@ class _ChatCardState extends State<ChatCard> {
           alignment: PlaceholderAlignment.middle,
           child: GestureDetector(
             onTap: () {
-              print('URL tapped: $url');
+              if (kDebugMode) {
+                print('URL tapped: $url');
+              }
               launchUrl(Uri.parse(url.trim()));
             },
             onLongPress: () {
@@ -240,7 +287,7 @@ class _ChatCardState extends State<ChatCard> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withAlpha(13),
                   blurRadius: 3,
                   offset: Offset(0, 1),
                 ),
@@ -252,7 +299,7 @@ class _ChatCardState extends State<ChatCard> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withAlpha(13),
                   blurRadius: 3,
                   offset: Offset(0, 1),
                 ),
@@ -269,7 +316,7 @@ class _ChatCardState extends State<ChatCard> {
       onLongPress: _onLongPress,
       onTap: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
@@ -320,7 +367,7 @@ class _ChatCardState extends State<ChatCard> {
       onLongPress: _onLongPress,
       onTap: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
@@ -336,8 +383,8 @@ class _ChatCardState extends State<ChatCard> {
               boxShadow: [
                 BoxShadow(
                   color: isMyMessage
-                      ? gradientColors[0].withOpacity(0.15)
-                      : Colors.black.withOpacity(0.05),
+                      ? gradientColors[0].withAlpha(38)
+                      : Colors.black.withAlpha(13),
                   blurRadius: 8,
                   offset: Offset(0, 3),
                 ),
@@ -357,7 +404,7 @@ class _ChatCardState extends State<ChatCard> {
                       style: TextStyle(
                         fontSize: 10,
                         color: isMyMessage
-                            ? Colors.white.withOpacity(0.7)
+                            ? Colors.white.withAlpha(179)
                             : Colors.black54,
                       ),
                       child: timestampWidget,
@@ -405,7 +452,7 @@ class _ChatCardState extends State<ChatCard> {
       onTap: _onLongPress,
       onLongPress: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Row(
           mainAxisAlignment:
               isMyMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -445,7 +492,7 @@ class _ChatCardState extends State<ChatCard> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: backgroundColor.withOpacity(0.2),
+                      color: backgroundColor.withAlpha(51),
                       blurRadius: 6,
                       offset: Offset(0, 3),
                     ),
@@ -528,14 +575,14 @@ class _ChatCardState extends State<ChatCard> {
       onTap: _onLongPress,
       onLongPress: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Card(
             color: isMyMessage ? Colors.blue.shade50 : Colors.white,
             elevation: 1,
             surfaceTintColor: Colors.transparent,
-            shadowColor: Colors.black.withOpacity(0.1),
+            shadowColor: Colors.black.withAlpha(13),
             margin: defaultMargin,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -610,7 +657,7 @@ class _ChatCardState extends State<ChatCard> {
       onLongPress: _onLongPress,
       onTap: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
@@ -621,7 +668,7 @@ class _ChatCardState extends State<ChatCard> {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: (isMyMessage ? myColor : otherColor).withOpacity(0.1),
+                  color: (isMyMessage ? myColor : otherColor).withAlpha(26),
                   blurRadius: 5,
                   offset: Offset(0, 2),
                 ),
@@ -643,7 +690,7 @@ class _ChatCardState extends State<ChatCard> {
                         style: TextStyle(
                           fontSize: 10,
                           color: isMyMessage
-                              ? Colors.white.withOpacity(0.7)
+                              ? Colors.white.withAlpha(179)
                               : (isDark ? Colors.white70 : Colors.black54),
                         ),
                         child: timestampWidget,
@@ -695,7 +742,7 @@ class _ChatCardState extends State<ChatCard> {
       onTap: _onLongPress,
       onLongPress: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
@@ -764,7 +811,7 @@ class _ChatCardState extends State<ChatCard> {
       onTap: _onLongPress,
       onLongPress: _onLongPress,
       child: Container(
-        color: _isSelected ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+        color: _isSelected ? Colors.grey.withAlpha(77) : Colors.transparent,
         child: Align(
           alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(

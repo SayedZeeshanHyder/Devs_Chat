@@ -1,29 +1,71 @@
 import 'package:flutter/material.dart';
 import '../models/chat_types.dart';
 
+/// A widget that provides an input field for chatting with multiple button options.
+///
+/// This widget allows the user to input text, send messages, and optionally include buttons
+/// for attachment and voice input, with various customization options.
 class ChatInputField extends StatefulWidget {
+  /// Controller for managing the text input.
   final TextEditingController controller;
+
+  /// A node that controls the focus of this input field.
   final FocusNode? focusNode;
+
+  /// Defines the input type behavior of the field.
   final InputFieldType inputType;
+
+  /// Hint text to display when the input field is empty.
   final String? hintText;
+
+  /// Callback function to handle sending a message.
   final Function(String) onSend;
+
+  /// Optional custom widget for the send button.
   final Widget? sendButtonWidget;
+
+  /// Optional custom widget for the attachment button.
   final Widget? attachmentButtonWidget;
+
+  /// Optional custom widget for the voice button.
   final Widget? voiceButtonWidget;
+
+  /// Function to be called when the attachment button is pressed.
   final Function()? onAttachmentPressed;
+
+  /// Function to be called when the voice button is pressed.
   final Function()? onVoicePressed;
+
+  /// Decoration for the input field container.
   final BoxDecoration? decoration;
+
+  /// Background color of the input field.
   final Color? backgroundColor;
+
+  /// Padding for the input field.
   final EdgeInsetsGeometry? padding;
+
+  /// Margin around the input field.
   final EdgeInsetsGeometry? margin;
+
+  /// Whether the attachment button should be shown.
   final bool showAttachmentButton;
+
+  /// Whether the voice button should be shown.
   final bool showVoiceButton;
+
+  /// Accent color used in the input field.
   final Color? accentColor;
+
+  /// Duration for animation effects.
   final Duration animationDuration;
+
+  /// Curve used for animation.
   final Curve animationCurve;
 
+  /// Creates a [ChatInputField] with the given properties.
   const ChatInputField({
-    Key? key,
+    super.key,
     required this.controller,
     this.focusNode,
     this.inputType = InputFieldType.defaultInput,
@@ -43,13 +85,17 @@ class ChatInputField extends StatefulWidget {
     this.accentColor,
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeInOut,
-  }) : super(key: key);
+  }); // Correctly passing the key to the super class
 
   @override
-  _ChatInputFieldState createState() => _ChatInputFieldState();
+  ChatInputFieldState createState() => ChatInputFieldState();
 }
 
-class _ChatInputFieldState extends State<ChatInputField>
+/// The state class for the [ChatInputField] widget.
+///
+/// This class holds the state for the [ChatInputField] widget. It manages the state
+/// of the input field, including text input, attachment, and voice input actions.
+class ChatInputFieldState extends State<ChatInputField>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   bool _isComposing = false;
@@ -116,7 +162,8 @@ class _ChatInputFieldState extends State<ChatInputField>
               BoxShadow(
                 offset: const Offset(0, 2),
                 blurRadius: 4,
-                color: Colors.black.withOpacity(0.05),
+                color: Color.fromARGB(
+                    (0.05 * 255).toInt(), 0, 0, 0), // Replacing .withOpacity()
               ),
             ],
           ),
@@ -171,10 +218,7 @@ class _ChatInputFieldState extends State<ChatInputField>
 
   Widget _buildRoundedInput(Color primaryColor) {
     return Container(
-      padding: widget.padding ??
-          const EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
+      padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16),
       margin: widget.margin ??
           const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: widget.decoration ??
@@ -185,7 +229,8 @@ class _ChatInputFieldState extends State<ChatInputField>
               BoxShadow(
                 offset: const Offset(0, 3),
                 blurRadius: 8,
-                color: Colors.black.withOpacity(0.08),
+                color: Color.fromARGB(
+                    (0.08 * 255).toInt(), 0, 0, 0), // Replaced with RGBA
               ),
             ],
           ),
@@ -230,7 +275,12 @@ class _ChatInputFieldState extends State<ChatInputField>
                       gradient: LinearGradient(
                         colors: [
                           primaryColor,
-                          primaryColor.withOpacity(0.8),
+                          Color.fromARGB(
+                            (0.8 * 255).toInt(), // Replaced with RGBA
+                            primaryColor.r.toInt(),
+                            primaryColor.g.toInt(),
+                            primaryColor.b.toInt(),
+                          ),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -251,10 +301,7 @@ class _ChatInputFieldState extends State<ChatInputField>
 
   Widget _buildAttachmentInput(Color primaryColor) {
     return Container(
-      padding: widget.padding ??
-          const EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
+      padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 12),
       margin: widget.margin ??
           const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: widget.decoration ??
@@ -266,7 +313,8 @@ class _ChatInputFieldState extends State<ChatInputField>
               BoxShadow(
                 offset: const Offset(0, 2),
                 blurRadius: 6,
-                color: Colors.black.withOpacity(0.06),
+                color: Color.fromARGB(
+                    (0.06 * 255).toInt(), 0, 0, 0), // Replaced with RGBA
               ),
             ],
           ),
@@ -344,10 +392,7 @@ class _ChatInputFieldState extends State<ChatInputField>
 
   Widget _buildVoiceInput(Color primaryColor) {
     return Container(
-      padding: widget.padding ??
-          const EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
+      padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 12),
       margin: widget.margin ??
           const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: widget.decoration ??
@@ -366,7 +411,8 @@ class _ChatInputFieldState extends State<ChatInputField>
               BoxShadow(
                 offset: const Offset(0, 2),
                 blurRadius: 8,
-                color: Colors.black.withOpacity(0.07),
+                color: Color.fromARGB(
+                    (0.07 * 255).toInt(), 0, 0, 0), // Replaced with RGBA
               ),
             ],
           ),
@@ -424,7 +470,12 @@ class _ChatInputFieldState extends State<ChatInputField>
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: primaryColor.withOpacity(0.1),
+                              color: Color.fromARGB(
+                                (0.1 * 255).toInt(), // Replaced with RGBA
+                                primaryColor.r.toInt(),
+                                primaryColor.g.toInt(),
+                                primaryColor.b.toInt(),
+                              ),
                             ),
                             child: Icon(
                               Icons.mic_rounded,

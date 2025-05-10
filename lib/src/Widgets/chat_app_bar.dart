@@ -3,30 +3,71 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../devs_chat.dart';
 
+/// A customizable chat app bar widget for use in messaging screens.
 class ChatAppBar extends StatelessWidget {
+  /// Defines the layout style or variant of the chat app bar.
   final ChatAppBarType? chatAppBarType;
+
+  /// The main title displayed in the app bar, typically the user’s name.
   final String? title;
+
+  /// An optional subtitle shown below the title (e.g., status or last seen).
   final String? subtitle;
+
+  /// An avatar image to show in the app bar (usually profile picture).
   final ImageProvider? avatarImage;
+
+  /// The background color of the app bar.
   final Color? backgroundColor;
+
+  /// The color of text elements in the app bar.
   final Color? textColor;
+
+  /// Action widgets (e.g., icons or buttons) to display on the right side.
   final List<Widget>? actions;
+
+  /// Whether to show a back button on the left side.
   final bool showBackButton;
+
+  /// Callback function triggered when the back button is pressed.
   final VoidCallback? onBackPressed;
+
+  /// Whether the app bar should appear elevated (with shadow).
   final bool elevated;
+
+  /// Elevation value if [elevated] is true.
   final double elevation;
+
+  /// Optional border radius to round corners of the app bar.
   final BorderRadius? borderRadius;
+
+  /// Optional leading widget (e.g., custom back button or avatar).
   final Widget? leading;
+
+  /// Whether the user is currently online.
   final bool? online;
+
+  /// A string representing the user's last seen timestamp.
   final String? lastSeen;
+
+  /// Whether to show a typing indicator under the title.
   final bool typingIndicator;
+
+  /// Whether to display a shadow below the app bar.
   final bool showShadow;
+
+  /// Optional custom height for the app bar.
   final double? height;
+
+  /// Text style for the title.
   final TextStyle? titleStyle;
+
+  /// Text style for the subtitle.
   final TextStyle? subtitleStyle;
 
+  /// Creates a new [ChatAppBar] widget.
   const ChatAppBar({
-    Key? key,
+    super.key,
     this.chatAppBarType = ChatAppBarType.defaultAppBar,
     this.title,
     this.subtitle,
@@ -47,7 +88,7 @@ class ChatAppBar extends StatelessWidget {
     this.height,
     this.titleStyle,
     this.subtitleStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +135,8 @@ class ChatAppBar extends StatelessWidget {
         boxShadow: showShadow
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withAlpha(
+                      13), // Replaced .withOpacity(0.05) with .withAlpha(13)
                   blurRadius: 1.0,
                   offset: Offset(0, 1),
                 ),
@@ -279,7 +321,8 @@ class ChatAppBar extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
+                    color: Colors.black.withAlpha(
+                        20), // Replaced .withOpacity(0.08) with .withAlpha(20)
                     blurRadius: 3,
                     offset: const Offset(0, 1),
                   ),
@@ -363,8 +406,8 @@ class ChatAppBar extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(right: 8),
                 decoration: BoxDecoration(
-                  color:
-                      (textColor ?? theme.colorScheme.primary).withOpacity(0.1),
+                  color: (textColor ?? theme.colorScheme.primary).withAlpha(
+                      25), // Replaced .withOpacity(0.1) with .withAlpha(25)
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
@@ -387,7 +430,8 @@ class ChatAppBar extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withAlpha(
+                              25), // Replaced .withOpacity(0.1) with .withAlpha(25)
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),
@@ -460,7 +504,7 @@ class ChatAppBar extends StatelessWidget {
     );
   }
 
-  // Professional business-style app bar
+// Professional business-style app bar
   Widget _buildBusinessAppBar(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -525,13 +569,15 @@ class ChatAppBar extends StatelessWidget {
                   ),
                   if (subtitle != null || typingIndicator)
                     typingIndicator
-                        ? _buildTypingIndicator(businessColor.withOpacity(0.6))
+                        ? _buildTypingIndicator(businessColor.withAlpha(
+                            153)) // Replaced .withOpacity(0.6) with .withAlpha(153)
                         : Text(
                             subtitle!,
                             style: subtitleStyle ??
                                 TextStyle(
                                   fontSize: 12,
-                                  color: businessColor.withOpacity(0.6),
+                                  color: businessColor.withAlpha(
+                                      153), // Replaced .withOpacity(0.6) with .withAlpha(153)
                                 ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -564,7 +610,8 @@ class ChatAppBar extends StatelessWidget {
           border: Border(
             bottom: BorderSide(
               color: isDark
-                  ? Colors.grey.shade800.withOpacity(0.6)
+                  ? Colors.grey.shade800.withAlpha(
+                      153) // Replaced .withOpacity(0.6) with .withAlpha(153)
                   : Colors.grey.shade200,
               width: 1.0,
             ),
@@ -595,7 +642,8 @@ class ChatAppBar extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.06),
+                          color: Colors.black.withAlpha(
+                              15), // Replaced .withOpacity(0.06) with .withAlpha(15)
                           blurRadius: 3,
                           offset: const Offset(0, 1),
                         ),
@@ -656,7 +704,10 @@ class ChatAppBar extends StatelessWidget {
                       online != null ||
                       lastSeen != null)
                     _buildConnectionStatus(
-                        context, isDark, txtColor.withOpacity(0.6)),
+                        context,
+                        isDark,
+                        txtColor.withAlpha(
+                            153)), // Replaced .withOpacity(0.6) with .withAlpha(153)
                 ],
               ),
             ),
@@ -718,13 +769,15 @@ class ChatAppBar extends StatelessWidget {
                     ),
                     if (subtitle != null || typingIndicator || online != null)
                       typingIndicator
-                          ? _buildTypingIndicator(minimalColor.withOpacity(0.6))
+                          ? _buildTypingIndicator(minimalColor.withAlpha(
+                              153)) // Replaced .withOpacity(0.6) with .withAlpha(153)
                           : Text(
                               online == true ? 'Online' : subtitle ?? '',
                               style: subtitleStyle ??
                                   TextStyle(
                                     fontSize: 12,
-                                    color: minimalColor.withOpacity(0.6),
+                                    color: minimalColor.withAlpha(
+                                        153), // Replaced .withOpacity(0.6) with .withAlpha(153)
                                   ),
                             ),
                   ],
@@ -845,9 +898,9 @@ class ChatAppBar extends StatelessWidget {
 
   Widget _buildSubtitle(BuildContext context, bool isDark) {
     if (typingIndicator) {
-      return _buildTypingIndicator(
-          (textColor ?? (isDark ? Colors.white : Colors.black87))
-              .withOpacity(0.7));
+      return _buildTypingIndicator((textColor ??
+              (isDark ? Colors.white : Colors.black87))
+          .withAlpha(178)); // Replaced .withOpacity(0.7) with .withAlpha(178)
     }
 
     return Text(
@@ -856,7 +909,8 @@ class ChatAppBar extends StatelessWidget {
           TextStyle(
             fontSize: 12,
             color: (textColor ?? (isDark ? Colors.white : Colors.black87))
-                .withOpacity(0.7),
+                .withAlpha(
+                    178), // Replaced .withOpacity(0.7) with .withAlpha(178)
           ),
       overflow: TextOverflow.ellipsis,
     );
@@ -866,7 +920,7 @@ class ChatAppBar extends StatelessWidget {
       [Color? customColor]) {
     final color = customColor ??
         (textColor ?? (isDark ? Colors.white : Colors.black87))
-            .withOpacity(0.7);
+            .withAlpha(178); // Replaced .withOpacity(0.7) with .withAlpha(178)
 
     if (typingIndicator) {
       return _buildTypingIndicator(color);

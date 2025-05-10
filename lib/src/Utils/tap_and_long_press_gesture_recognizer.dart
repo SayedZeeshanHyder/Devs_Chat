@@ -3,20 +3,41 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 
+/// A custom gesture recognizer that detects both tap and long press gestures.
+///
+/// This gesture recognizer allows you to handle both a simple tap and a long press gesture on a pointer.
+/// You can specify custom callbacks for both gestures through the [onTap] and [onLongPress] properties.
 class TapAndLongPressGestureRecognizer extends OneSequenceGestureRecognizer {
+  /// A callback that is triggered when a tap gesture is recognized.
+  ///
+  /// This is called when the user taps the screen (a simple touch without holding).
   final GestureTapCallback? onTap;
+
+  /// A callback that is triggered when a long press gesture is recognized.
+  ///
+  /// This is called when the user holds their touch on the screen for a certain duration.
   final GestureLongPressCallback? onLongPress;
 
+  /// The duration after which the long press gesture is triggered.
+  ///
+  /// If the user holds their touch for at least this duration, a long press will be detected.
   static const Duration _longPressTimeout = Duration(milliseconds: 500);
 
   PointerDownEvent? _down;
   Timer? _longPressTimer;
 
+  /// Creates a [TapAndLongPressGestureRecognizer].
+  ///
+  /// You can optionally specify callbacks for the tap and long press gestures.
+  ///
+  /// The [onTap] callback is called when a tap is detected, and [onLongPress] is called when a long press is detected.
+  ///
+  /// The [debugOwner] parameter can be used for debugging purposes and is passed to the superclass.
   TapAndLongPressGestureRecognizer({
     this.onTap,
     this.onLongPress,
-    Object? debugOwner,
-  }) : super(debugOwner: debugOwner);
+    super.debugOwner,
+  });
 
   @override
   void addPointer(PointerDownEvent event) {
